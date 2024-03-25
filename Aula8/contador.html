@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aula 07 - Intro Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-bind:style="{ backgroundColor: corfundo }">A cor do css está cetada para {{ corfundo }}</h1>
+        <button v-on:click="trocaCor()">Troca cor</button>
+        <p>{{ qtdClick }}</p>
+        <h3 v-bind:style="{ color: corContador }">Contador: {{ timer() }} = {{ parImpar() }}</h3>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const { createApp } = Vue;
+    createApp({
+        data() {
+            return {
+                corfundo: 'blue',
+                corfundo1: 'red',
+                qtdClick: 0,
+                num: 0,
+                corContador: ''
+            }
+        },
+        methods: {
+            timer() {
+                setTimeout(() => {
+                    this.num += 1
+                    this.definirCorContador()
+                }, 2000)
+                return this.num
+            },
+            parImpar: function () {
+                return this.num % 2 === 0 ? "Par" : "Ímpar"
+            },
+            definirCorContador() {
+                this.corContador = this.num % 2 === 0 ? 'green' : 'red'
+            },
+            trocaCor() {
+                    let aux = this.corfundo;
+                    this.corfundo = this.corfundo1;
+                    this.corfundo1 = aux;
+                    this.qtdClick += 1;
+                }
+        }
+    }).mount("#app")
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula08 v-on e v-BIND</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-bind:style="{ backgroundColor: corfundo }">A cor do css está cetada para {{ corfundo }}</h1>
+        <button v-on:click="trocaCor()">Troca cor</button>
+        <p>{{ qtdClick }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    corfundo: 'blue',
+                    corfundo1: 'red',
+                    qtdClick: 0
+                };
+            },
+            methods: {
+                trocaCor() {
+                    let aux = this.corfundo;
+                    this.corfundo = this.corfundo1;
+                    this.corfundo1 = aux;
+                    this.qtdClick += 1;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
